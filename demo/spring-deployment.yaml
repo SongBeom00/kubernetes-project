@@ -1,0 +1,25 @@
+apiVersion: apps/v1 # Deployment API 버전 공식 문서 참조
+kind: Deployment
+
+metadata:
+  name: spring-deployment
+
+# Deployment 세부 정보
+spec:
+  replicas: 5 # 5개의 복제본을 생성합니다.
+  selector:
+    matchLabels:
+      app: backend-app
+
+  # 배포할 Pod 정의
+  template:
+    metadata:
+      labels: # 카테고리
+        app: backend-app
+    spec:
+      containers:
+        - name: spring-server
+          image: spring-server
+          imagePullPolicy: IfNotPresent
+          ports:
+              - containerPort: 8080 # 다른 개발자들이 알기 위해 명시적으로

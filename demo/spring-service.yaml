@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: spring-service # Service 이름
+
+# Service 세부 정보
+spec:
+  type: NodePort # Service 종류
+  selector:
+    app: backend-app # Pod를 선택하기 위한 레이블 deployment에서 정의한 레이블과 일치해야 합니다.
+  ports:
+     - protocol: TCP # 프로토콜은 TCP로 설정합니다.
+       port: 8080 # 쿠버네티스 내부에서 Service에 접근할 때 사용할 포트입니다.
+       targetPort: 8080 # Pod의 컨테이너 포트와 일치해야 합니다.
+       nodePort: 30000 # 외부에서 사용자들이 접근하게 될 포트 번호입니다.
+
